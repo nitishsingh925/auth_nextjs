@@ -8,7 +8,6 @@ connectDB();
 
 const POST = async (request: NextRequest) => {
   try {
-    console.log(request.json());
     const { username, email, password } = await request.json();
     const user = await User.findOne({ email });
     if (user) {
@@ -32,7 +31,10 @@ const POST = async (request: NextRequest) => {
       { status: 201 }
     );
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { error: "Internal server error" + error.message },
+      { status: 500 }
+    );
   }
 };
 export { POST };
