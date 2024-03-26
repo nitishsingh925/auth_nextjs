@@ -9,8 +9,8 @@ connectDB();
 const POST = async (request: NextRequest) => {
   try {
     const { username, email, password } = await request.json();
-    const user = await User.findOne({ email });
-    if (user) {
+    const alreadyUser = await User.findOne({ $or: [{ email }, { username }] });
+    if (alreadyUser) {
       return NextResponse.json(
         { error: "User already exists" },
         { status: 400 }
@@ -25,7 +25,7 @@ const POST = async (request: NextRequest) => {
     });
     const savedUser = await newUser.save();
     // send verification email
-    await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
+    // await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
     return NextResponse.json(
       { message: "User created successfully", success: true, savedUser },
       { status: 201 }
