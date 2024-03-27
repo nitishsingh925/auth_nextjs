@@ -25,7 +25,7 @@ const POST = async (request: NextRequest) => {
     });
     const savedUser = await newUser.save();
     // send verification email
-    // await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
+    await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
     return NextResponse.json(
       { message: "User created successfully", success: true, savedUser },
       { status: 201 }
