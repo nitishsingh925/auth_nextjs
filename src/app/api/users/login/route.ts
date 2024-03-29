@@ -38,6 +38,7 @@ const POST = async (request: NextRequest) => {
     reponse.cookies.set("token", token, {
       httpOnly: true,
     });
+    return reponse;
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
