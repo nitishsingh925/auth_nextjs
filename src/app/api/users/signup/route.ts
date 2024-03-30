@@ -24,10 +24,15 @@ const POST = async (request: NextRequest) => {
       password: hashedPassword,
     });
     const savedUser = await newUser.save();
+    const { password: _, ...userWithoutPassword } = savedUser._doc;
     // send verification email
     await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
     return NextResponse.json(
-      { message: "User created successfully", success: true, savedUser },
+      {
+        message: "User created successfully",
+        success: true,
+        user: userWithoutPassword,
+      },
       { status: 201 }
     );
   } catch (error: any) {
