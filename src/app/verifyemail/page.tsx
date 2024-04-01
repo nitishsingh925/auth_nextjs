@@ -44,8 +44,6 @@ const VerifyEmailPage = () => {
       <h1 className="text-5xl">Verify Email</h1>
       {!verified && (
         <>
-          {" "}
-          {/* Wrap conditional content for better readability */}
           <button
             onClick={handleVerifyClick}
             className="mt-5 p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
