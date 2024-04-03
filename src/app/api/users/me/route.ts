@@ -10,7 +10,7 @@ const POST = async (request: NextRequest) => {
   const user = await User.findById({ _id: userId }).select("-password");
   return NextResponse.json({
     message: "User found",
-    data: "user",
+    user,
   });
 };
 export { POST };
